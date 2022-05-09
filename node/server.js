@@ -22,7 +22,7 @@ server.addService(todoPackage.Todo.service, {
     "readTodos" : readTodos,
     "readTodosStream": readTodosStream
 });
-server.bindAsync('grpc.localhost:50051', grpc.ServerCredentials.createSsl(
+server.bindAsync('localhost:50051', grpc.ServerCredentials.createSsl(
     fs.readFileSync('/s3/certs/rootCA.pem'),
     [{
         private_key: fs.readFileSync('/s3/certs/key.pem'),

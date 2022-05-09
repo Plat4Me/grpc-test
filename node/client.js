@@ -23,7 +23,7 @@ const args = parseArgs(process.argv.slice(2), {
 });
 
 // client
-const target = args.target ? args.target : 'grpc.localhost:50051';
+const target = args.target ? args.target : 'localhost:50051';
 const client = new todoPackage.Todo(target, grpc.credentials.createSsl(
     fs.readFileSync('/s3/certs/rootCA.pem'),
     fs.readFileSync('/s3/certs/key.pem'),
