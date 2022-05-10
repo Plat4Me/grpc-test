@@ -20,7 +20,7 @@
 require dirname(__FILE__).'/vendor/autoload.php';
 
 // client
-$client = new TodoPackage\TodoClient('localhost:50051', [
+$client = new TodoPackage\TodoClient('grpc.localhost', [
     'credentials' => Grpc\ChannelCredentials::createSsl(
         file_get_contents('/s3/certs/rootCA.pem'),
         file_get_contents('/s3/certs/key.pem'),
