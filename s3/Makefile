@@ -9,6 +9,6 @@ cert-issue:
 
 cert-issue:
 	mkcert -cert-file certs/cert.pem -key-file certs/key.pem \
-		"app.localhost" \
+		"localhost" \
 		"grpc.localhost"
 	cp $(shell mkcert -CAROOT)/rootCA.pem certs/rootCA.pem

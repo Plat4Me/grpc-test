@@ -12,6 +12,8 @@ up:
 stop:
 	docker-compose -p grpc stop
 
+reload: stop up
+
 down:
 	docker-compose -p grpc down
 

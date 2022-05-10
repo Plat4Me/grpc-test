@@ -46,28 +46,27 @@ RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 
 # common for grpc
 RUN apt-get -qq update && apt-get -qq install -y \
-  autoconf automake curl git libtool \
+  autoconf automake cmake libtool \
   pkg-config unzip zlib1g-dev
 
 ARG MAKEFLAGS=-j8
 
-# protoc
-WORKDIR /tmp/protoc
-RUN curl -sSL https://github.com/protocolbuffers/protobuf/releases/download/v3.20.1/protoc-3.20.1-linux-x86_64.zip -o protoc.zip && \
-  unzip -qq protoc.zip && \
-  cp ./bin/protoc /usr/local/bin/protoc
-
-# grpc_php_plugin
+# protoc + grpc_php_plugin
 WORKDIR /tmp/github
-RUN git clone -b v1.34.1 --recursive https://github.com/grpc/grpc && \
-    cd grpc && \
-    git submodule update --init && \
-    make grpc_php_plugin
+RUN git clone -b v1.45.2 https://github.com/grpc/grpc && \
+  cd grpc && \
+  git submodule update --init && \
+  mkdir -p cmake/build && \
+  cd cmake/build && \
+  cmake ../.. && \
+  make protoc grpc_php_plugin
 
-RUN cp /tmp/github/grpc/bins/opt/grpc_php_plugin /usr/local/bin/grpc_php_plugin
-# RUN cp /tmp/github/grpc/bins/opt/protobuf /usr/local/bin/protobuf
+RUN cp /tmp/github/grpc/cmake/build/third_party/protobuf/protoc /usr/local/bin/protoc
+RUN cp /tmp/github/grpc/cmake/build/grpc_php_plugin             /usr/local/bin/grpc_php_plugin
 
+# TODO: https://github.com/grpc/grpc/tree/master/src/php#build-and-install-the-grpc-extension
 RUN pecl install grpc
+RUN pecl install protobuf-3.12.2
 
 EXPOSE 9000
 
