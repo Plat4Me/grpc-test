@@ -16,6 +16,7 @@ reload: stop up
 
 down:
 	docker-compose -p grpc down
+	docker volume rm grpc_s3
 
 run-php:
 	docker exec -it grpc-php bash -c "make generate && composer install && sh client.sh"
