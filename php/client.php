@@ -21,7 +21,12 @@ require dirname(__FILE__).'/vendor/autoload.php';
 
 // client
 $client = new TodoPackage\TodoClient('node:50051', [
-    'credentials' => Grpc\ChannelCredentials::createInsecure(),
+    'credentials' => Grpc\ChannelCredentials::createSsl(
+        file_get_contents('/s3/certs/rootCA.pem'),
+        file_get_contents('/s3/certs/key.pem'),
+        file_get_contents('/s3/certs/cert.pem')
+    ),
+    'grpc.ssl_target_name_override' => 'localhost'
 ]);
 
 // implementation
