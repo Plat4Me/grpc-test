@@ -1,24 +1,6 @@
 version: '3.8'
 services:
 
-  nginx:
-    container_name: grpc-nginx
-    image: nginx:1.21
-    working_dir: /var/www/html
-    restart: unless-stopped
-    volumes:
-      - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
-      - "./nginx/grpc.conf:/etc/nginx/conf.d/grpc.conf"
-      - "./s3:/s3"
-    ports:
-      - 80:80
-      - 443:443
-    networks:
-      - grpc
-    depends_on:
-      - php
-      - node
-
   php:
     container_name: grpc-php
     build:

@@ -20,7 +20,7 @@
 require dirname(__FILE__).'/vendor/autoload.php';
 
 // client
-$client = new TodoPackage\TodoClient('grpc-node:50051', [
+$client = new TodoPackage\TodoClient('node:50051', [
     'credentials' => Grpc\ChannelCredentials::createInsecure(),
 ]);
 

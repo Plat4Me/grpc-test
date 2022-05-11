@@ -28,15 +28,3 @@ run-node:
 	docker exec -it grpc-node bash -c "node client.js 'Now eat it'"
 
 test: run-node run-php
-
-hosts: host-remove host-set
-
-host-set:
-	echo "# grpc" 					    >> /etc/hosts
-	echo $(IP_NGINX)"  app.localhost"   >> /etc/hosts
-	echo $(IP_NGINX)"  grpc.localhost"  >> /etc/hosts
-
-host-remove:
-	sed -i "/# grpc/d" 			    /etc/hosts
-	sed -i "/\sapp.localhost/d"     /etc/hosts
-	sed -i "/\sgrpc.localhost/d"    /etc/hosts
