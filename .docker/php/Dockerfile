@@ -66,7 +66,7 @@ RUN cp /tmp/github/grpc/cmake/build/grpc_php_plugin             /usr/local/bin/g
 
 # TODO: https://github.com/grpc/grpc/tree/master/src/php#build-and-install-the-grpc-extension
 RUN pecl install grpc
-RUN pecl install protobuf-3.12.2
+# RUN pecl install protobuf-3.12.2
 
 EXPOSE 9000
 
