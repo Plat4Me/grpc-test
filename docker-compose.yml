@@ -11,8 +11,6 @@ services:
       - './php:/app:delegated'
       - './shared:/shared:delegated'
       - "./s3:/s3"
-    ports:
-      - '9000:9000'
     networks:
       - grpc
 
@@ -30,8 +28,6 @@ services:
       - './node:/app:delegated'
       - './shared:/shared:delegated'
       - "./s3:/s3"
-    ports:
-      - '50051:50051'
     networks:
       - grpc
 
